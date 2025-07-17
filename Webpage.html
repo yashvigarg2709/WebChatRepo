@@ -1,109 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Send Message</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 30px;
-      background-color: #f4f4f4;
-    }
-    textarea {
-      width: 100%;
-      height: 150px;
-      padding: 10px;
-      font-size: 16px;
-      resize: vertical;
-    }
-    button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    #output {
-      margin-top: 20px;
-      background: #fff;
-      padding: 10px;
-      border: 1px solid #ddd;
-    }
-  </style>
-</head>
+
+
 <body>
 
   <h1>Send a Message</h1>
-  <textarea id="messageInput" placeholder="Type your message here..."></textarea><br>
-  <button onclick="sendMessage()">Send</button>
-
   <div id="output"></div>
-
-  /*<script>
-    function sendMessage() {
-      const message = document.getElementById("messageInput").value;
-      const outputDiv = document.getElementById("output");
-
-      if (message.trim() === "") {
-        outputDiv.innerHTML = "<span style='color: red;'>Please enter a message.</span>";
-        return;
-      }
-
-      outputDiv.innerHTML = "<strong>Message sent:</strong><br>" + message;
-      document.getElementById("messageInput").value = ""; // Clear textarea
-    }
-  </script>*/
-
-<script>
-  async function sendMessage() {
-    const message = document.getElementById("messageInput").value;
-    const outputDiv = document.getElementById("output");
-
-    if (message.trim() === "") {
-      outputDiv.innerHTML += "<div style='color: red;'>Please enter a message.</div>";
-      return;
-    }
-
-    outputDiv.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
-    document.getElementById("messageInput").value = "";
-
-    const isEscalation = message.toLowerCase().includes("live agent");
-
-    if (isEscalation) {
-      // ➕ Add escalation notice before sending to backend
-      outputDiv.innerHTML += `<div><strong>System:</strong> Escalation detected: Connecting you to a live agent...</div>`;
-
-      const res = await fetch("http://localhost:3000/escalate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message })
-      });
-
-      const data = await res.json();
-      outputDiv.innerHTML += `<div><strong>System:</strong> ${data.status}</div>`;
-
-      if (data.sessionId) {
-        startAgentPolling(data.sessionId); // Poll for agent replies
-      }
-
-      return;
-    }
-
-    // Optional fallback if not escalation
-    outputDiv.innerHTML += `<div><em>This message was not escalated.</em></div>`;
-  }
-
-  function startAgentPolling(sessionId) {
-    setInterval(async () => {
-      const res = await fetch(`http://localhost:3000/agent-messages?sessionId=${sessionId}`);
-      const data = await res.json();
-      const outputDiv = document.getElementById("output");
-
-      for (const msg of data.messages) {
-        outputDiv.innerHTML += `<div><strong>Agent:</strong> ${msg}</div>`;
-      }
-    }, 4000);
-  }
-</script>
 
 </body>
 </html>
