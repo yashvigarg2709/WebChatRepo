@@ -10,7 +10,7 @@ Make sure to always refer to our [Wiki](https://github.com/Salesforce-Async-Mess
 Ensure you have an Embedded Service deployment for Messaging for In-App and Web created of type Custom Client.
 
 ## Launch Application Remotely
-Go to [https://salesforce-async-messaging.github.io/messaging-web-api-sample-app/build/index.html](https://salesforce-async-messaging.github.io/messaging-web-api-sample-app/build/index.html)
+Go to [https://yashvigarg2709.github.io/WebChatRepo/build/index.html](https://yashvigarg2709.github.io/WebChatRepo/build/index.html)
 
 ## Local Development and Testing Setup
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
