@@ -95,6 +95,11 @@ function getUnauthenticatedAccessToken() {
  * @returns {Promise}
  */
 function createConversation(conversationId, routingAttributes) {
+	routingAttributes = {
+		"_firstName": "jacob",
+		"_email": "jjacobs@acme.com",
+		"_subject": "subject from api"
+	};
 	const esDeveloperName = getDeploymentDeveloperName();
 	const messagingUrl = getSalesforceMessagingUrl();
 	const apiPath = `${messagingUrl}/iamessage/api/v2/conversation`;
